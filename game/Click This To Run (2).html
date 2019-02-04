@@ -1,0 +1,184 @@
+<html>
+    <title>HangMan By Ali</title>
+    <Head><center><h1>H a n g m a n   G a m e</h1>
+<h2>By Ali Arshad</h2></center></Head>
+<center><h2>S p a c e T h e m e d</h2></center></Head><center>
+<style type="text/css">
+    
+    @font-face {font-family:header; src: url("Death Star.otf");}
+    
+    h1{
+        font-size: 80px;
+        background: -webkit-linear-gradient(right,#ff0ff1,#985f95);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family:header;
+    }
+    
+    h2{
+        font-size: 40px;
+        background: -webkit-linear-gradient(right,#ff0ff1,#985f95 );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: header; 
+    }
+    
+    body {
+    background-image: url("qw.jpg");
+    background-color: #cccccc;
+    }
+
+    button {
+    background-color: midnightblue; 
+    border: none;
+    color: mediumpurple;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    font-family: header;
+    border: 1px solid purple; 
+    }
+    
+    p{
+        font-size: 50px;
+            font-family:header;
+    }
+    
+</style>    
+ 
+    <body>
+<center> 
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    <button id="d">D</button>
+    <button id="e">E</button>
+    <button id="f">F</button>
+    <button id="g">G</button>
+    <button id="h">H</button>
+    <button id="i">I</button>
+    <button id="j">J</button>
+    <button id="k">K</button>
+    <button id="l">L</button>
+    <button id="m">M</button>
+    <button id="n">N</button>
+    <button id="o">O</button>
+    <button id="p">P</button>
+    <button id="q">Q</button>
+    <button id="r">R</button>
+    <button id="s">S</button>
+    <button id="t">T</button>
+    <button id="u">U</button>
+    <button id="v">V</button>
+    <button id="w">W</button>
+    <button id="x">X</button>
+    <button id="y">Y</button>
+    <button id="z">Z</button>
+    <button id="PA">PLAY AGAIN</button>
+    
+    <p id ="howmanyletters"></p>
+    <p id ="lifes"></p>
+</center>   
+    </body>
+    
+    <script>
+    document.getElementById('a').onclick = function() {word('a');}
+    document.getElementById('b').onclick = function() {word('b');}
+    document.getElementById('c').onclick = function() {word('c');}
+    document.getElementById('d').onclick = function() {word('d');}
+    document.getElementById('e').onclick = function() {word('e');}
+    document.getElementById('f').onclick = function() {word('f');}
+    document.getElementById('g').onclick = function() {word('g');}
+    document.getElementById('h').onclick = function() {word('h');}
+    document.getElementById('i').onclick = function() {word('i');}
+    document.getElementById('j').onclick = function() {word('j');}
+    document.getElementById('k').onclick = function() {word('k');}
+    document.getElementById('l').onclick = function() {word('l');}
+    document.getElementById('m').onclick = function() {word('m');}
+    document.getElementById('n').onclick = function() {word('n');}
+    document.getElementById('o').onclick = function() {word('o');}
+    document.getElementById('p').onclick = function() {word('p');}
+    document.getElementById('q').onclick = function() {word('q');}
+    document.getElementById('r').onclick = function() {word('r');}
+    document.getElementById('s').onclick = function() {word('s');}
+    document.getElementById('t').onclick = function() {word('t');}
+    document.getElementById('u').onclick = function() {word('u');}
+    document.getElementById('v').onclick = function() {word('v');}
+    document.getElementById('w').onclick = function() {word('w');}
+    document.getElementById('x').onclick = function() {word('x');}
+    document.getElementById('y').onclick = function() {word('y');}
+    document.getElementById('z').onclick = function() {word('z');}
+    document.getElementById('PA').onclick = function() {playAgain();}
+          
+    var wordlist = ["SPACE","MOON","EARTH","DARK","LIGHT","MARS","STARS","PLANETS","SUN"];
+    var randomword = wordlist[Math.floor(Math.random()*wordlist.length)].toLowerCase();
+    var lives = 5;
+    var runOnce = true;
+    var win= [];
+    won();
+    lost();
+    function won(letter,numb){
+        win[numb] = letter;
+        var check ="";
+        printLetters();
+        for (var i =0; i <randomword.length;i++){
+            if (win[i] != null){
+                check += win[i]
+            }
+        }
+        if (check === randomword){
+            win=[];
+            win.push("YOU WIN!");
+            printLetters();
+        }
+    }
+    
+    function lost(){
+        document.getElementById("lifes").innerHTML = "Lives: "+ lives;
+        if (lives === 0){
+            win=[];
+            win.push("YOU LOSE");
+            printLetters();
+        }
+    }
+    
+    function playAgain(){
+        location.reload();
+    }
+
+    function printLetters(){
+        var howmanyletters ="";
+        
+        if (runOnce){
+          for (var i = 0; i < randomword.length;i++){
+            win[i]= "_ " ;
+        }
+        runOnce= false;
+        }
+        
+        for (var i = 0; i < randomword.length;i++){
+            if(win[i] != null)
+            howmanyletters += win[i];
+        }
+        document.getElementById("howmanyletters").innerHTML = howmanyletters;
+    }
+    
+    function word(letter){
+        var life = false;
+        console.log(letter);
+        for(var i = 0; i <randomword.length; i++){
+            if (letter == randomword[i]){
+                won(letter,i);
+                life = true; 
+            }
+        }  
+        if(!life){
+            lives--;
+            lost();
+        }
+    }
+    </script>
+        
+</html>
